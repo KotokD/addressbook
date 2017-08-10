@@ -17,9 +17,7 @@ public class DeleteAddressBook extends TestBase  {
     List<AddressData> after= app.getAddressBookHelper().getAddressBookList();
     Assert.assertEquals(after.size(),before.size()-1);
     before.remove(before.size()-1);
-    for(int i =0;i< after.size()-1;i++)
-    {
-      Assert.assertEquals(after.get(i),before.get(i));
-    }
+
+      Assert.assertEquals(after,before);
   }
 }
