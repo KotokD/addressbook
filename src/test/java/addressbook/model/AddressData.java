@@ -1,11 +1,11 @@
 package addressbook.model;
 
 public class AddressData {
-  String firstname;
-  String lastname;
-  String address;
-  String email;
-  String phone;
+  private final String firstname;
+  private final String lastname;
+  private final String address;
+  private final String email;
+  private final String phone;
 
   public AddressData(String firstname,String lastname, String address, String email, String phone)
   {

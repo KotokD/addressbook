@@ -15,31 +15,30 @@ public class AppManager {
   protected WebDriver driver;
   protected String browser;
   private AddressBookHelper addressBookHelper;
+  public GroupHelper groupHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
 
   public AppManager(String browser) {
-    this.browser=browser;
+    this.browser = browser;
   }
 
   @Test
 
   public void init() {
-    if(browser.equals(org.openqa.selenium.remote.BrowserType.CHROME) )
-      driver= new ChromeDriver();
-    else if (browser.equals(org.openqa.selenium.remote.BrowserType.FIREFOX))
-    {
-      driver= new FirefoxDriver();
-    }
-    else if (browser.equals(org.openqa.selenium.remote.BrowserType.EDGE))
-    {
-      driver= new EdgeDriver();
+    if (browser.equals(org.openqa.selenium.remote.BrowserType.CHROME))
+      driver = new ChromeDriver();
+    else if (browser.equals(org.openqa.selenium.remote.BrowserType.FIREFOX)) {
+      driver = new FirefoxDriver();
+    } else if (browser.equals(org.openqa.selenium.remote.BrowserType.EDGE)) {
+      driver = new EdgeDriver();
     }
     driver.get("http://localhost/addressbook/");
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     addressBookHelper = new AddressBookHelper(driver);
-    sessionHelper= new SessionHelper(driver);
-    navigationHelper =new NavigationHelper(driver);
+    groupHelper=new GroupHelper(driver);
+    sessionHelper = new SessionHelper(driver);
+    navigationHelper = new NavigationHelper(driver);
     sessionHelper.signIn("admin", "secret");
   }
 
@@ -50,6 +49,9 @@ public class AppManager {
 
   public AddressBookHelper getAddressBookHelper() {
     return addressBookHelper;
+  }
+
+  public GroupHelper getGroupHelper() { return groupHelper;
   }
 
   public NavigationHelper getNavigationHelper() {

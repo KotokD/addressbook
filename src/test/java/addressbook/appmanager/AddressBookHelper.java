@@ -29,8 +29,8 @@ public NavigationHelper navigationHelper;
 
   }
 
-  public void initAddressBookModification() {
-    driver.findElement(By.cssSelector("value ='Edit'")).click();
+  public void initAddressBookModification( int number) {
+    driver.findElements(By.cssSelector("img[title ='Edit']")).get(number).click();
 
   }
 
@@ -56,11 +56,7 @@ public NavigationHelper navigationHelper;
     }
     else return true;
   }
-  public void createAddressBook()
-  {
-    ;
 
-  }
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
@@ -72,10 +68,12 @@ public NavigationHelper navigationHelper;
 
   public List<AddressData> getAddressBookList() {
     List<AddressData> addressbooks= new ArrayList<AddressData>();
-    List <WebElement> elements_lastname =driver.findElements(By.cssSelector(("tr[name] td:nth-child(2)")));
-    for(WebElement element: elements_lastname){
-      String lastname=element.getText();
-      AddressData addressData= new AddressData(null,lastname,null,null,null);
+    List <WebElement> rows =driver.findElements(By.cssSelector(("tr[name]")));
+    for(WebElement element: rows){
+      String lastname=element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      String firstname= element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+      String address=element.findElement(By.cssSelector("td:nth-child(4)")).getText();
+      AddressData addressData= new AddressData(firstname,lastname,address,null,null);
       addressbooks.add(addressData);
     }
     return addressbooks;

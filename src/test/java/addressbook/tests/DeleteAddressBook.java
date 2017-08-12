@@ -1,4 +1,5 @@
 package addressbook.tests;
+import addressbook.model.AddressBookComparator;
 import addressbook.model.AddressData;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class DeleteAddressBook extends TestBase  {
     List<AddressData> after= app.getAddressBookHelper().getAddressBookList();
     Assert.assertEquals(after.size(),before.size()-1);
     before.remove(before.size()-1);
-
-      Assert.assertEquals(after,before);
+    before.sort(new AddressBookComparator());
+    Assert.assertEquals(after,before);
   }
 }
