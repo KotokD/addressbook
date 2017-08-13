@@ -11,9 +11,9 @@ import java.util.List;
     public class GroupModification extends TestBase {
       @BeforeMethod
       public void ensurePrecondition() {
-        app.group().navigateToGroupPage();
+        app.getNavigationHelper().navigateToGroupPage();
         if (app.group().isGroupThere() == false) {
-          app.group().createGroup(new GroupData("test1", "header", "footer"));
+          app.group().createGroup(new GroupData().withName("test1").withHeader("header").withFooter("footer"));
         }
       }
 

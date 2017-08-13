@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupHelper extends HelperBase{
-  public GroupHelper groupHelper;
-  public NavigationHelper navigationHelper;
+  public NavigationHelper navigationHelper = new NavigationHelper(driver);
+
   public GroupHelper(WebDriver driver) {
     super(driver);
   }
@@ -19,20 +19,21 @@ public class GroupHelper extends HelperBase{
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
-    navigateToGroupPage();
+   getNavigationHelper().navigateToGroupPage();
   }
+
   public void createGroup(GroupData group) {
-    navigateToGroupPage();
+    getNavigationHelper().navigateToGroupPage();
     initGroupCreation();
     fillGroupForm(group);
     submitCrerationGroup();
-    navigateToGroupPage();
+    getNavigationHelper().navigateToGroupPage();
   }
  public void deleteGroup(int index) {
-    navigateToGroupPage();
+   getNavigationHelper().navigateToGroupPage();
     selectGroup(index);
     initGroupkRemove();
-    navigateToGroupPage();
+   getNavigationHelper().navigateToGroupPage();
   }
 
   public void fillGroupForm(GroupData groupData) {
@@ -84,13 +85,15 @@ public class GroupHelper extends HelperBase{
     for(WebElement element: elements){
       String name=element.getText();
       String id=element.findElement(By.tagName("input")).getAttribute("value");
-      GroupData group= new GroupData(id,name,null,null);
+      GroupData group= new GroupData().withName(name);
       groups.add(group);
     }
     return groups;
   }
-  public void navigateToGroupPage() {
-    click(By.linkText("groups"));
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
+
 
 }

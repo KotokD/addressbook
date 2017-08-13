@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.BeforeSuite;
-import sun.plugin2.util.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +22,6 @@ public class AppManager {
     this.browser = browser;
   }
 
-  @Test
   public void init() {
     if (browser.equals(org.openqa.selenium.remote.BrowserType.CHROME))
       driver = new ChromeDriver();
