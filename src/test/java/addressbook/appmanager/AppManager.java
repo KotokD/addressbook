@@ -1,10 +1,11 @@
 package addressbook.appmanager;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeSuite;
 import sun.plugin2.util.BrowserType;
 
 import java.util.concurrent.TimeUnit;
@@ -12,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class AppManager {
 
-  protected WebDriver driver;
-  protected String browser;
+  public WebDriver driver;
+  public String browser;
   private AddressBookHelper addressBookHelper;
   public GroupHelper groupHelper;
   private SessionHelper sessionHelper;
@@ -24,7 +25,6 @@ public class AppManager {
   }
 
   @Test
-
   public void init() {
     if (browser.equals(org.openqa.selenium.remote.BrowserType.CHROME))
       driver = new ChromeDriver();
@@ -47,11 +47,11 @@ public class AppManager {
     driver.quit();
   }
 
-  public AddressBookHelper getAddressBookHelper() {
+  public AddressBookHelper adressbook() {
     return addressBookHelper;
   }
 
-  public GroupHelper getGroupHelper() { return groupHelper;
+  public GroupHelper group() { return groupHelper;
   }
 
   public NavigationHelper getNavigationHelper() {

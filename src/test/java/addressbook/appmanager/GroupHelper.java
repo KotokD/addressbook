@@ -8,9 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupHelper extends HelperBase{
+  public GroupHelper groupHelper;
   public NavigationHelper navigationHelper;
   public GroupHelper(WebDriver driver) {
     super(driver);
+  }
+
+  public void modifyGroup(GroupData group, int index) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    navigateToGroupPage();
+  }
+  public void createGroup(GroupData group) {
+    navigateToGroupPage();
+    initGroupCreation();
+    fillGroupForm(group);
+    submitCrerationGroup();
+    navigateToGroupPage();
+  }
+ public void deleteGroup(int index) {
+    navigateToGroupPage();
+    selectGroup(index);
+    initGroupkRemove();
+    navigateToGroupPage();
   }
 
   public void fillGroupForm(GroupData groupData) {
@@ -67,4 +89,8 @@ public class GroupHelper extends HelperBase{
     }
     return groups;
   }
+  public void navigateToGroupPage() {
+    click(By.linkText("groups"));
+  }
+
 }

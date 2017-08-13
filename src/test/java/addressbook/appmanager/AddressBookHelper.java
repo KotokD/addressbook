@@ -9,10 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressBookHelper extends HelperBase {
-public NavigationHelper navigationHelper;
+  public NavigationHelper navigationHelper = new NavigationHelper(driver);
 
   public AddressBookHelper(WebDriver driver) {
     super(driver);
+  }
+
+  public void createAddressBook(AddressData adressbook) {
+    getNavigationHelper().navigateToAddressBookPage();
+    fillAddressBookForm(adressbook);
+    submitCerationAddressBook();
+    getNavigationHelper().navigateToHomePage();
+  }
+
+  public void editAddressBook(AddressData addressbook, int index) {
+    getNavigationHelper().navigateToHomePage();
+    initAddressBookModification(index);
+    fillAddressBookForm(addressbook);
+    submitAddressBookModification();
+    getNavigationHelper().navigateToHomePage();
+  }
+
+  public void deleteAddressBook(int index) {
+    getNavigationHelper().navigateToHomePage();
+    selectAddressBook(index);
+    initAddressBookRemove();
+    submitAddressBookRemove();
+    getNavigationHelper().navigateToHomePage();
   }
 
   public void fillAddressBookForm(AddressData addressData) {
@@ -25,11 +48,11 @@ public NavigationHelper navigationHelper;
 
   public void selectAddressBook(int number) {
 
-      driver.findElements(By.name("selected[]")).get(number).click();
+    driver.findElements(By.name("selected[]")).get(number).click();
 
   }
 
-  public void initAddressBookModification( int number) {
+  public void initAddressBookModification(int number) {
     driver.findElements(By.cssSelector("img[title ='Edit']")).get(number).click();
 
   }
@@ -50,11 +73,10 @@ public NavigationHelper navigationHelper;
     driver.switchTo().alert().accept();
   }
 
-  public boolean isAddressBookThere(){
-    if(isElementPresent(By.cssSelector("td.center"))==false){
+  public boolean isAddressBookThere() {
+    if (isElementPresent(By.cssSelector("td.center")) == false) {
       return false;
-    }
-    else return true;
+    } else return true;
   }
 
 
@@ -63,17 +85,17 @@ public NavigationHelper navigationHelper;
   }
 
   public int getBookCount() {
-   return driver.findElements(By.name("selected[]")).size();
+    return driver.findElements(By.name("selected[]")).size();
   }
 
   public List<AddressData> getAddressBookList() {
-    List<AddressData> addressbooks= new ArrayList<AddressData>();
-    List <WebElement> rows =driver.findElements(By.cssSelector(("tr[name]")));
-    for(WebElement element: rows){
-      String lastname=element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      String firstname= element.findElement(By.cssSelector("td:nth-child(3)")).getText();
-      String address=element.findElement(By.cssSelector("td:nth-child(4)")).getText();
-      AddressData addressData= new AddressData(firstname,lastname,address,null,null);
+    List<AddressData> addressbooks = new ArrayList<AddressData>();
+    List<WebElement> rows = driver.findElements(By.cssSelector(("tr[name]")));
+    for (WebElement element : rows) {
+      String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+      String address = element.findElement(By.cssSelector("td:nth-child(4)")).getText();
+      AddressData addressData = new AddressData(firstname, lastname, address, null, null);
       addressbooks.add(addressData);
     }
     return addressbooks;

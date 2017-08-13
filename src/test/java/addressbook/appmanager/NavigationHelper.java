@@ -14,12 +14,8 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void navigateToHomePage() {
-    if (!isElementPresent(By.id("maintable")))
-    {
+    if (!isElementPresent(By.id("maintable"))) {
       click(By.linkText("home"));
     }
-  }
-  public void navigateToGroupPage() {
-    click(By.linkText("groups"));
   }
 }

@@ -1,20 +1,20 @@
 package addressbook.tests;
 
-import addressbook.appmanager.AppManager;
-import org.junit.After;
-import org.junit.Before;
+import addressbook.appmanager.AppManager;;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 
-  protected final AppManager app = new AppManager(BrowserType.CHROME);
+  protected static final AppManager app = new AppManager(BrowserType.CHROME);
 
-  @Before
+  @BeforeSuite
   public void setUp() {
     app.init();
   }
 
-  @After
+  @AfterSuite
   public void teatDown() {
     app.stop();
   }
