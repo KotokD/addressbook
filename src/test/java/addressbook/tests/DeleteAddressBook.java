@@ -12,7 +12,7 @@ public class DeleteAddressBook extends TestBase  {
   public void ensurePrecondition() {
     app.getNavigationHelper().navigateToHomePage();
     if (app.adressbook().isAddressBookThere() == false) {
-      app.adressbook().createAddressBook(new AddressData("firstname", "lastname", "street Test", "test@mail.com", "1111111"));
+      app.adressbook().createAddressBook(new AddressData("firstname", "lastname", "street Test", "test@mail.com", "1111111",null));
     }
   }
   @Test

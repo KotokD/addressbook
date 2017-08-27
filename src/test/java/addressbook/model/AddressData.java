@@ -1,19 +1,22 @@
 package addressbook.model;
 
+import java.io.File;
+
 public class AddressData {
   private final String firstname;
   private final String lastname;
   private final String address;
   private final String email;
   private final String phone;
+  private  File photo;
 
-  public AddressData(String firstname,String lastname, String address, String email, String phone)
-  {
-    this.firstname=firstname;
-    this.lastname=lastname;
-    this.address=address;
-    this.email=email;
-    this.phone=phone;
+  public AddressData(String firstname, String lastname, String address, String email, String phone,File photo) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.address = address;
+    this.email = email;
+    this.phone = phone;
+    this.photo=photo;
   }
 
   @Override
@@ -64,4 +67,8 @@ public class AddressData {
   public String getPhone() {
     return phone;
   }
+
+  public File getPhoto() { return photo; }
+
+  public void withPhoto(File photo) { this.photo = photo; }
 }

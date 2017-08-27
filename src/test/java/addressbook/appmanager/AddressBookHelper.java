@@ -44,6 +44,7 @@ public class AddressBookHelper extends HelperBase {
     type(By.name("address"), addressData.getAddress());
     type(By.name("mobile"), addressData.getPhone());
     type(By.name("email"), addressData.getEmail());
+    attach(By.name("photo"),addressData.getPhoto());
   }
 
   public void selectAddressBook(int number) {
@@ -95,7 +96,7 @@ public class AddressBookHelper extends HelperBase {
       String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String address = element.findElement(By.cssSelector("td:nth-child(4)")).getText();
-      AddressData addressData = new AddressData(firstname, lastname, address, null, null);
+      AddressData addressData = new AddressData(firstname, lastname, address, null, null,null);
       addressbooks.add(addressData);
     }
     return addressbooks;
