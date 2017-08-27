@@ -1,6 +1,9 @@
 package addressbook.generator;
 
 import addressbook.model.GroupData;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,17 +13,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupDataGenerator {
-  public static void main(String args[]) throws IOException {
-    Integer count= Integer.parseInt(args[0]);
-    File file=new File(args[1]);
-    System.out.println(new File(".").getAbsolutePath());
-    List <GroupData> groups =generateGroups(count);
-    save(groups,file);
+  @Parameter(names = "-c" ,description = "Group count")
+  public int count;
 
+  @Parameter(names = "-f" ,description = "Target file")
+  public String file;
+  public static void main(String args[]) throws IOException {
+    GroupDataGenerator generator=new GroupDataGenerator();
+    JCommander jconmmander= new  JCommander(generator);
+    try {
+      jconmmander.parse(args);
+    }
+    catch (ParameterException ex)
+    {
+     jconmmander.usage();
+     return;
+    }
+    generator.run();
+    
+  }
+  private void run() throws IOException {
+    List <GroupData> groups =generateGroups(count);
+    save(groups,new File (file));
   }
 
 
-  private static List<GroupData> generateGroups(int count)
+  private  List<GroupData> generateGroups(int count)
   {
     List<GroupData> groups= new ArrayList<GroupData>();
     for(int i=0; i<count;i++)
@@ -29,7 +47,7 @@ public class GroupDataGenerator {
     }
     return groups;
   }
-  private static void save (List<GroupData> groups,File file) throws IOException {
+  private void save (List<GroupData> groups,File file) throws IOException {
     Writer writer =new FileWriter(file);
     for(GroupData group:groups)
     {
